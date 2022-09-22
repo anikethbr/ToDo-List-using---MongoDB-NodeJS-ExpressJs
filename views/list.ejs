@@ -7,28 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TO DO LIST</title>
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="icon" href="data:,">
 </head>
 
 <body>
     <div class="box" id="heading">
         <h1>
-            <%= kindOfDay %>
+            <%= listTitle %>
         </h1>
     </div>
     <div class="box">
-        <%for(var i=0; i<newListItems.length; i++){%>
-            <div class="item">
-                <input type="checkbox">
-                <p>
-                    <%= newListItems[i] %>
-                </p>
-            </div>
-                <%}%>
-                    <form method="post" action="/" class="item">
-                        <input type="text" placeholder="Add Item" name="newItem" autofocus autocomplete="off">
-                        <button type="submit">+</button>
-            </div>
+        <%newListItems.forEach((item)=>{%>
+            <form action="/delete" method="post">
+                <div class="item">
+                    <input type="checkbox" name="checkbox" value="<%=item._id%>" onchange="this.form.submit()">
+                    <p>
+                        <%= item.name %>
+                    </p>
+                </div>
+                <input type="hidden" name="listName" value="<%=listTitle%>">
             </form>
+            <%});%>
+                <form method="post" action="/" class="item">
+                    <input type="text" placeholder="Add Item" name="newItem" autofocus autocomplete="off">
+                    <button type="submit" name="list" value="<%=listTitle%>">+</button>
+    </div>
+    </form>
     </div>
 </body>
 <footer>
